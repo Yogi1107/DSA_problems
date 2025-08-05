@@ -5,7 +5,7 @@ The goal is to build strong problem-solving skills, improve coding efficiency, a
 
 ---
 
-## 📌 Contents
+## Contents
 - Solutions to **LeetCode** problems  
 - Solutions to **HackerRank** problems  
 
