@@ -1,0 +1,40 @@
+#Leetcode Problem
+
+#Date : 29-09-2025
+#Problem 20: Valid Parentheses
+
+
+class Solution:
+    def isValid(self, s: str) -> bool:
+        bracket = {'}':'{', ')':'(', ']':'['}
+        stack = []
+
+        for i in s:
+            if i in bracket.values():
+                stack.append(i)
+            elif i in bracket.keys():
+                if not stack or bracket[i] != stack.pop():
+                    return False
+
+        return not stack
+
+
+from collections.abc import Sequence
+
+class Solution:
+    def isValid(self, s: Sequence[str]) -> bool:
+        # map closing → expected opening
+        expected_open_for = {')': '(', ']': '[', '}': '{'}
+        stack: list[str] = []
+
+        for ch in s:
+            if ch in "([{":
+                stack.append(ch)
+            else:  # ch is a closing bracket
+                if not stack:
+                    return False
+                if stack[-1] != expected_open_for[ch]:
+                    return False
+                stack.pop()
+
+        return not stack  # valid only if all opens were closed
