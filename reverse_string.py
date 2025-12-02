@@ -20,4 +20,13 @@ class Solution:
             s[right] = temp
             left += 1
             right -= 1
+
         return s
+
+
+last = len(s) - 1
+        for i in range(0,len(s)//2):
+            temp = s[i]
+            s[i] = s[last]
+            s[last] = temp
+            last -= 1
