@@ -1,8 +1,18 @@
+# class Solution:
+#     def countDigits(self, num: int) -> int:
+#         result = []
+#         for i in str(num):
+#             if num % int(i) == 0:
+#                 result.append(i)
+#         return len(result)
+        
 class Solution:
     def countDigits(self, num: int) -> int:
-        result = []
-        for i in str(num):
-            if num % int(i) == 0:
-                result.append(i)
-        return len(result)
-        
+        temp = num
+        ans = 0 
+        while temp>0:
+             r = temp % 10
+             if num % r == 0:
+                ans +=1
+             temp //= 10
+        return ans 
