@@ -2,33 +2,38 @@ class Solution:
     def pyramidTransition(self, bottom: str, allowed: list[str]) -> bool:
         from collections import defaultdict
 
-        # Build mapping: "AB" -> ["C", "D", ...]
+        # Build mapping: pair -> possible tops
         patterns = defaultdict(list)
         for a, b, c in allowed:
             patterns[a + b].append(c)
 
-        # DFS to build pyramid
-        def dfs(curr: str) -> bool:
-            if len(curr) == 1:
+        memo = {}
+
+        def dfs(row: str) -> bool:
+            if len(row) == 1:
                 return True
 
-            # Try to build next row
-            def backtrack(i: int, next_row: list) -> bool:
-                if i == len(curr) - 1:
+            if row in memo:
+                return memo[row]
+
+            # Generate next row using backtracking
+            def build_next(i: int, next_row: list) -> bool:
+                if i == len(row) - 1:
                     return dfs("".join(next_row))
 
-                pair = curr[i] + curr[i + 1]
+                pair = row[i] + row[i + 1]
                 if pair not in patterns:
                     return False
 
                 for ch in patterns[pair]:
                     next_row.append(ch)
-                    if backtrack(i + 1, next_row):
+                    if build_next(i + 1, next_row):
                         return True
                     next_row.pop()
 
                 return False
 
-            return backtrack(0, [])
+            memo[row] = build_next(0, [])
+            return memo[row]
 
         return dfs(bottom)
