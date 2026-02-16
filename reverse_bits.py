@@ -1,18 +1,15 @@
-#190: Reverse Bits
-
 class Solution:
     def reverseBits(self, n: int) -> int:
-        binary_representation = bin(n)[2:].zfill(32)
-        reverse_bin_representation = binary_representation[::-1]
-        return int(reverse_bin_representation, 2)
+        binary_32 = bin(n)[2:].zfill(32)
+        reversed_binary = binary_32[::-1]
+        return int(reversed_binary, 2)
 
 # class Solution:
 #     def reverseBits(self, n: int) -> int:
-#         return int(
-#             (
-#                 bin(n)[2:].zfill(32)
-#             )[::-1],
-#             2
-#         )
-#     __import__("atexit").register(lambda: open("display_runtime.txt", "w").write("0"))
-        
+#         result = 0
+
+#         for _ in range(32):
+#             result = (result << 1) | (n & 1)
+#             n >>= 1
+
+#         return result
